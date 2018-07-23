@@ -1,0 +1,50 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxRichEdit.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxRichEdit" tagprefix="dx" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <style>
+        @font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src:        url('./TitilliumWeb-Regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+    </style>
+        <script>
+        function OnPopupMenuShowing(s, e) {
+                //if (re.selection.isPictureSelected) {
+                 var insertCaptionItem = new ASPxClientRichEditPopupMenuItem();
+                 insertCaptionItem.name = "addCaption";
+                 insertCaptionItem.text = "Insert Caption";
+                 e.menuItems.Insert(e.menuItems.length, insertCaptionItem);
+               // }
+        }
+
+        function OnCustomCommandExecuted(s, e) {
+            if (e.commandName == "addCaption") {
+                var selectedInterval = s.selection.intervals[0];
+                re.selection.intervals = [new ASPx.Interval(selectedInterval.start + selectedInterval.length, 0)];
+                re.commands.insertParagraph.execute();
+                re.commands.insertFiguresCaption.execute();
+            }
+                
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="font-size:1pt; position:absolute; top:-1000; display:none; font-family: Titillium Web">test</div>
+        <dx:ASPxRichEdit ID="ASPxRichEdit1" runat="server" WorkDirectory="~\App_Data\WorkDirectory" ClientInstanceName="re">
+            <%--<ClientSideEvents PopupMenuShowing="OnPopupMenuShowing" CustomCommandExecuted="OnCustomCommandExecuted" />
+            <Settings>
+                <Behavior Save="Hidden" SaveAs="Hidden" Open="Hidden" />
+            </Settings>--%>
+        </dx:ASPxRichEdit>
+    </form>
+</body>
+</html>
