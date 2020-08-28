@@ -1,4 +1,7 @@
 # ASPxRichEdit - How to add a caption to a selected image by clicking a custom context menu item
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/141300991/)**
+<!-- run online end -->
 
 This example illustrates how to add a caption to the currently selected image once a user clicks the corresponding context menu item.
 
